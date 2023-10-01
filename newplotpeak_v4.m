@@ -4,8 +4,8 @@
 %3. Adjust the parameters within the %%%%%%%%%% lines (3 sections in total)
 %4. Run the script, all windows will close automatically after finished
 %5. The .csv files with converted wavelength would be saved in the same folder
-%6. The images (.png) files for each spectrum would be saved in the same folder
-%7. All spectra in the folder would be plotted in a image named All_spectra
+%6. The images (.png) files for each profile would be saved in the same folder
+%7. All profiles in the folder would be plotted in a image named All_profiles
 %8. Check the result and adjust the parameters again (especially d & h)
 %Code By Tze Yuan Chen
 clear ; close all; fclose all; clc; 
@@ -70,7 +70,7 @@ end
 %Muti plot
 figure('outerposition',get(0,'screensize'))
 %%%%%[section 3]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figtitle="All_spectra"; %title 
+figtitle="All_profiles"; %title 
 d=2; %compare to nearby data point (>1 integer)
 h=0.1; %higher than those data points by (>0 floating point)
 sp=50; %space between each profile
