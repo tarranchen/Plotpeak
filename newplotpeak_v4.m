@@ -1,4 +1,4 @@
-%  ¡iInstructions¡j
+%  [Instructions]
 %1. Put .xye files and this script in the same folder
 %2. Double-click to open this .m file with Matlab
 %3. Adjust the parameters within the %%%%%%%%%% lines (3 sections in total)
@@ -9,13 +9,14 @@
 %8. Check the result and adjust the parameters again (especially d & h)
 %Code By Tze Yuan Chen
 clear ; close all; fclose all; clc; 
-%%%%%¡isection 1¡j%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ori_wl=0.77491;   %Synchrotron (original) X-ray wavelength £f
-tag_wl=1.540598;  %In house X-ray wavelength £f
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%[section 1]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ori_wl=0.77491;   %Synchrotron (original) X-ray wavelength Î»
+tag_wl=1.540598;  %In house X-ray wavelength Î»
 xyes = ls ('*.xye'); % list all .xye files in the folder 
+remove_line=3;  %remove headings
+filenamerm=16; %delete "_mar3450_A92.xye"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fn = size(xyes,1); % number of files
-remove_line = 3;  %remove headings
 for f = 1: fn
    file_name = strtrim(xyes(f,:));
    fileID = fopen(file_name,'r');
@@ -36,20 +37,20 @@ for f = 1: fn
        data(line,1) = asind(sin(data(line,1)./2.*pi./180)./ori_wl.*tag_wl).*2;  %convert wave length 
    end
    fclose(fileID);
-   new_file_name = (file_name(1:length(strtrim(file_name))-16)); %delete "_mar3450_A92.xye"
+   new_file_name = (file_name(1:length(strtrim(file_name))-filenamerm)); %delete "_mar3450_A92.xye"
    fileID2 = fopen((new_file_name)+(".csv"),'w'); %save csv file
    fprintf(fileID2,('%s'),num2str(data(:,1))+", "+num2str(data(:,2))+newline);
    fclose(fileID2);
    figure('outerposition',get(0,'screensize'))
    title(new_file_name,'Interpreter','none') %figure title
-   ylabel("Intensity") %figure y axis
-   xlabel("2theta")    %figure x axis
    %Single plot
-   %%%%%¡isection 2¡j%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %%%%%[section 2]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    d=2; %compare to nearby data point (>1 integer)
    h=0.1; %higher than those data points by (>0 floating point)
-   %thin strong peak: small d large h; thick weal peak: large d small h
+   %strong peak: small d large h; broad peak: large d small h
    accurate=2; %accuracy, default 0.01
+   xlabel("2theta")    %figure x axis
+   ylabel("Intensity") %figure y axis
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    hold on
    plot(data(:,1),data(:,2))
@@ -67,20 +68,20 @@ for f = 1: fn
 end
 
 %Muti plot
-%%%%%¡isection 3¡j%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure('outerposition',get(0,'screensize'))
+%%%%%[section 3]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figtitle="All_spectra"; %title 
 d=2; %compare to nearby data point (>1 integer)
 h=0.1; %higher than those data points by (>0 floating point)
-sp=50; %space between each file
+sp=50; %space between each profile
 k=1; %whole peak :1; small peak: 2
 show_2theta = "y"; %show 2theta (y/n)
 show_dspacing = "y"; %show d-spacing (y/n)
 accurate=2; %accuracy, default 0.01
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure('outerposition',get(0,'screensize'))
-title(figtitle,'Interpreter','none') 
+xlabel("2theta")    %figure x axis
 ylabel("Intensity") %figure y axis
-xlabel("2theta") %figure x axis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+title(figtitle,'Interpreter','none') 
 hold on
 csvs = ls ('*.csv'); % list all .xye files in the folder 
 cfn = size(csvs,1); % number of files
