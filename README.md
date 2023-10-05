@@ -3,8 +3,10 @@ This application can convert all the raw files (such as .xye) in a folder into s
 
 # Instructions
 1. Download and run "Plotpeak_Installer_web.exe", it will install the MATLAB Runtime.
-2. Download "Plotpeak_v6.exe" and put it into the .xye file folder.
-3. Run the application and read the instructions inside.
+2. Download "Plotpeak_v6.exe" (alternativily copy/cut from where you install in step 1) and put it into the .xye file folder.
+3. Run the application and adjust the parameters.
+4. After red "Processing" become green "Finished", the .csv files with converted wavelength and .png files for each profile would be saved in the same folder with an additional All_profiles image.
+5. Check the results and adjust the parameters again (especially d & h).
 
 # How to Cite
 Chen, T. Y. (2023). Plotpeak. In (Version 6.0) GitHub. https://github.com/tarranchen/Plotpeak
