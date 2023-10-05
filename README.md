@@ -9,4 +9,4 @@ This application can convert all the raw files (such as .xye) in a folder into s
 5. Check the results and adjust the parameters again (especially d & h).
 
 # How to Cite
-Chen, T. Y. (2023). Plotpeak. In (Version 6.0) GitHub. https://github.com/tarranchen/Plotpeak
+Chen, T. Y. (2023). Plotpeak. In (Version 6.1) GitHub. https://github.com/tarranchen/Plotpeak
